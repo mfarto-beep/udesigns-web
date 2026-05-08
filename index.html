@@ -526,14 +526,15 @@
     .card-bg {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 5rem;
-      color: rgba(255,255,255,0.04);
-      letter-spacing: 0.1em;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+      /* Oscurecer imagen en reposo */
+      filter: brightness(0.55) saturate(0.8);
+    }
+    .portfolio-card:hover .card-bg {
+      filter: brightness(0.35) saturate(0.6);
     }
     .card-color-bar {
       position: absolute;
@@ -545,18 +546,23 @@
       transition: transform 0.4s ease;
     }
     .portfolio-card:hover .card-color-bar { transform: scaleX(1); }
-    .portfolio-card:hover .card-bg { transform: scale(1.08); }
+    .portfolio-card:hover .card-bg { transform: scale(1.06); }
     .card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.3) 50%, transparent 100%);
+      background: linear-gradient(to top, rgba(13,13,13,0.97) 0%, rgba(13,13,13,0.5) 55%, rgba(13,13,13,0.1) 100%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 1.8rem;
-      opacity: 0;
-      transition: opacity var(--transition);
+      opacity: 1;
+      transition: background var(--transition);
     }
+    .portfolio-card:not(:hover) .card-overlay {
+      background: linear-gradient(to top, rgba(13,13,13,0.82) 0%, rgba(13,13,13,0.25) 45%, transparent 100%);
+    }
+    .portfolio-card:not(:hover) .card-desc { opacity: 0; }
+    .card-desc { transition: opacity var(--transition); }
     .portfolio-card:hover .card-overlay { opacity: 1; }
     .card-cat {
       font-family: 'Space Mono', monospace;
@@ -579,11 +585,6 @@
       color: rgba(255,255,255,0.65);
       line-height: 1.6;
     }
-    /* Card accent colors per category */
-    .card-branding .card-bg  { background: linear-gradient(135deg, #1a0a0a 0%, #2a0808 100%); }
-    .card-packaging .card-bg { background: linear-gradient(135deg, #0a0a1a 0%, #0d0d2a 100%); }
-    .card-digital .card-bg   { background: linear-gradient(135deg, #0a1a0a 0%, #0d1f0d 100%); }
-
     /* Card number display */
     .card-num {
       position: absolute;
@@ -1095,7 +1096,7 @@
 
       <!-- BRANDING -->
       <div class="portfolio-card card-branding" data-cat="branding">
-        <div class="card-bg">FC</div>
+        <div class="card-bg" style="background-image:url('images/ferreycorp.jpg')"></div>
         <div class="card-num">01</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1106,7 +1107,7 @@
       </div>
 
       <div class="portfolio-card card-branding" data-cat="branding">
-        <div class="card-bg">CF</div>
+        <div class="card-bg" style="background-image:url('images/cenfotour.jpg')"></div>
         <div class="card-num">02</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1117,7 +1118,7 @@
       </div>
 
       <div class="portfolio-card card-branding" data-cat="branding">
-        <div class="card-bg">DS</div>
+        <div class="card-bg" style="background-image:url('images/disal.jpg')"></div>
         <div class="card-num">03</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1128,7 +1129,7 @@
       </div>
 
       <div class="portfolio-card card-branding" data-cat="branding">
-        <div class="card-bg">RP</div>
+        <div class="card-bg" style="background-image:url('images/ripley.jpg')"></div>
         <div class="card-num">04</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1139,7 +1140,7 @@
       </div>
 
       <div class="portfolio-card card-branding" data-cat="branding">
-        <div class="card-bg">PP</div>
+        <div class="card-bg" style="background-image:url('images/promperu.jpg')"></div>
         <div class="card-num">05</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1151,7 +1152,7 @@
 
       <!-- PACKAGING -->
       <div class="portfolio-card card-packaging" data-cat="packaging">
-        <div class="card-bg">LI</div>
+        <div class="card-bg" style="background-image:url('images/laiberica.jpg')"></div>
         <div class="card-num">06</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1162,7 +1163,7 @@
       </div>
 
       <div class="portfolio-card card-packaging" data-cat="packaging">
-        <div class="card-bg">MA</div>
+        <div class="card-bg" style="background-image:url('images/mia.jpg')"></div>
         <div class="card-num">07</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1173,7 +1174,7 @@
       </div>
 
       <div class="portfolio-card card-packaging" data-cat="packaging">
-        <div class="card-bg">TF</div>
+        <div class="card-bg" style="background-image:url('images/telefonica.jpg')"></div>
         <div class="card-num">08</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1184,7 +1185,7 @@
       </div>
 
       <div class="portfolio-card card-packaging" data-cat="packaging">
-        <div class="card-bg">AL</div>
+        <div class="card-bg" style="background-image:url('images/alicorp.jpg')"></div>
         <div class="card-num">09</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1195,7 +1196,7 @@
       </div>
 
       <div class="portfolio-card card-packaging" data-cat="packaging">
-        <div class="card-bg">CT</div>
+        <div class="card-bg" style="background-image:url('images/cientativa.jpg')"></div>
         <div class="card-num">10</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1207,7 +1208,7 @@
 
       <!-- DIGITAL -->
       <div class="portfolio-card card-digital" data-cat="digital">
-        <div class="card-bg">DG</div>
+        <div class="card-bg" style="background-image:url('images/delfin.jpg')"></div>
         <div class="card-num">11</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1218,7 +1219,7 @@
       </div>
 
       <div class="portfolio-card card-digital" data-cat="digital">
-        <div class="card-bg">AS</div>
+        <div class="card-bg" style="background-image:url('images/asabercomer.jpg')"></div>
         <div class="card-num">12</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1229,7 +1230,7 @@
       </div>
 
       <div class="portfolio-card card-digital" data-cat="digital">
-        <div class="card-bg">IR</div>
+        <div class="card-bg" style="background-image:url('images/iridium.jpg')"></div>
         <div class="card-num">13</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1240,7 +1241,7 @@
       </div>
 
       <div class="portfolio-card card-digital" data-cat="digital">
-        <div class="card-bg">DC</div>
+        <div class="card-bg" style="background-image:url('images/dyc.jpg')"></div>
         <div class="card-num">14</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1251,7 +1252,7 @@
       </div>
 
       <div class="portfolio-card card-digital" data-cat="digital">
-        <div class="card-bg">OR</div>
+        <div class="card-bg" style="background-image:url('images/oriunda.jpg')"></div>
         <div class="card-num">15</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1262,7 +1263,7 @@
       </div>
 
       <div class="portfolio-card card-digital" data-cat="digital">
-        <div class="card-bg">BS</div>
+        <div class="card-bg" style="background-image:url('images/bismart.jpg')"></div>
         <div class="card-num">16</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
