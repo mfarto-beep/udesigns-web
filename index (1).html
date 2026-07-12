@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>u designs · agencia creativa · Lima, Perú</title>
+  <meta name="description" content="u designs — agencia creativa de branding, packaging y marketing digital. Datos, diseño, creatividad y tecnología para llegar al corazón de las personas." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    /* =================== CSS VARIABLES =================== */
+    :root {
+      --red:    #E31E24;
+      --red-dk: #B81419;
+      --black:  #0D0D0D;
+      --white:  #F5F3EF;
+      --gray:   #888888;
+      --border: rgba(227,30,36,0.25);
+      --card-bg: #141414;
+      --nav-bg:  rgba(13,13,13,0.72);
+      --text:    #F5F3EF;
+      --text-muted: #888888;
+      --surface: #1A1A1A;
+      --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    [data-theme="light"] {
+      --black:   #F5F3EF;
+      --white:   #0D0D0D;
+      --card-bg: #EBEBEB;
+      --nav-bg:  rgba(245,243,239,0.72);
+      --text:    #0D0D0D;
+      --text-muted: #555555;
+      --surface: #E0DEDA;
+    }
+
+    /* =================== RESET & BASE =================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background-color: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color var(--transition), color var(--transition);
+    }
+    ::selection { background: var(--red); color: #fff; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* =================== SCROLLBAR =================== */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+    /* =================== UTILITIES =================== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 7rem 0; }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .tag::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--red);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+    .red { color: var(--red); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-red {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-red::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .btn-red:hover::after { opacity: 0.12; }
+    .btn-red:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(227,30,36,0.38); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--red);
+      color: var(--red);
+      transform: translateY(-2px);
+    }
+
+    /* =================== NOISE OVERLAY =================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* =================== NAV =================== */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    #navbar.scrolled { padding: 0.6rem 0; }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .nav-logo .u-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px; height: 32px;
+      background: var(--red);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1rem;
+      margin-right: 4px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--red);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 1rem; }
+    #theme-toggle {
+      background: none;
+      border: 1.5px solid var(--border);
+      width: 38px; height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: all var(--transition);
+      font-size: 1rem;
+    }
+    #theme-toggle:hover { border-color: var(--red); color: var(--red); }
+    #menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    #menu-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--text);
+      transition: all var(--transition);
+    }
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      transition: color var(--transition);
+    }
+    #mobile-menu a:hover { color: var(--red); }
+    #mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      background: none; border: none;
+      color: var(--text);
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* =================== HERO =================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 6rem;
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(227,30,36,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(227,30,36,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-bg-gradient {
+      position: absolute;
+      top: 0; right: 0;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(ellipse at top right, rgba(227,30,36,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow .tag { margin: 0; }
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 15vw, 14rem);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      position: relative;
+    }
+    .hero-headline .word-outline {
+      -webkit-text-stroke: 2px var(--red);
+      color: transparent;
+    }
+    .hero-headline .word-red { color: var(--red); }
+    .hero-sub {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-description {
+      max-width: 500px;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .hero-description strong { color: var(--text); font-weight: 500; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .hero-scroll svg { color: var(--red); }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--red);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* =================== MARQUEE =================== */
+    .marquee-section {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      background: var(--red);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 18s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: #fff;
+      padding: 0 2.5rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .marquee-item::after {
+      content: '●';
+      font-size: 0.5rem;
+      opacity: 0.6;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* =================== ABOUT =================== */
+    #nosotros { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+    .about-quote .accent { color: var(--red); }
+    .about-body {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+      line-height: 1.8;
+    }
+    .about-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .pillar {
+      border-left: 3px solid var(--red);
+      padding-left: 1.5rem;
+    }
+    .pillar-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .pillar-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* =================== METODOLOGÍA =================== */
+    #metodologia {}
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 4rem;
+      border: 1px solid var(--border);
+    }
+    .method-card {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+      transition: background var(--transition);
+    }
+    .method-card:last-child { border-right: none; }
+    .method-card:hover { background: rgba(227,30,36,0.05); }
+    .method-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .method-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+    .method-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* =================== PORTFOLIO =================== */
+    #portafolio { background: var(--surface); }
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 2.5rem 0;
+    }
+    .filter-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.2rem;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+    .portfolio-card {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--card-bg);
+    }
+    .portfolio-card.hidden { display: none; }
+    .card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+      /* Oscurecer imagen en reposo */
+      filter: brightness(0.55) saturate(0.8);
+    }
+    .portfolio-card:hover .card-bg {
+      filter: brightness(0.35) saturate(0.6);
+    }
+    .card-color-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .portfolio-card:hover .card-color-bar { transform: scaleX(1); }
+    .portfolio-card:hover .card-bg { transform: scale(1.06); }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.97) 0%, rgba(13,13,13,0.5) 55%, rgba(13,13,13,0.1) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.8rem;
+      opacity: 1;
+      transition: background var(--transition);
+    }
+    .portfolio-card:not(:hover) .card-overlay {
+      background: linear-gradient(to top, rgba(13,13,13,0.82) 0%, rgba(13,13,13,0.25) 45%, transparent 100%);
+    }
+    .portfolio-card:not(:hover) .card-desc { opacity: 0; }
+    .card-desc { transition: opacity var(--transition); }
+    .portfolio-card:hover .card-overlay { opacity: 1; }
+    .card-cat {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.4rem;
+    }
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .card-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+    /* Card number display */
+    .card-num {
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+    }
+
+    /* =================== SKILLS =================== */
+    #habilidades {}
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+    .skills-layout--single {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 48rem;
+    }
+    .skill-item { margin-bottom: 2rem; }
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+    .skill-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .skill-pct {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: var(--red);
+    }
+    .skill-bar-track {
+      height: 3px;
+      background: var(--border);
+      position: relative;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--red);
+      width: 0%;
+      transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+    .skill-bar-fill::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+    .awards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .award-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      transition: border-color var(--transition);
+    }
+    .award-item:hover { border-color: var(--red); }
+    .award-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .award-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .award-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* =================== CLIENTES =================== */
+    #clientes { background: var(--surface); }
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1px;
+      margin-top: 3rem;
+      border: 1px solid var(--border);
+    }
+    .client-cell {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .client-cell:hover {
+      color: var(--text);
+      background: rgba(227,30,36,0.06);
+      border-color: var(--red);
+    }
+    .client-cell img {
+      display: block;
+      width: 100%;
+      max-width: 8rem;
+      max-height: 3.5rem;
+      object-fit: contain;
+      filter: grayscale(1);
+      opacity: 0.72;
+      transition: filter var(--transition), opacity var(--transition), transform var(--transition);
+    }
+    .client-cell:hover img {
+      filter: grayscale(0);
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    /* =================== CONTACT =================== */
+    #contacto {}
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 6rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+    .contact-info-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      margin-bottom: 2.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px;
+      background: rgba(227,30,36,0.12);
+      border: 1px solid var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      color: var(--red);
+    }
+    .contact-detail-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .contact-detail-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .form-group { margin-bottom: 1.4rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    input, textarea, select {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 0.9rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--transition);
+      -webkit-appearance: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--red);
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    .form-success {
+      display: none;
+      padding: 1.2rem;
+      background: rgba(227,30,36,0.1);
+      border: 1px solid var(--red);
+      color: var(--red);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      margin-top: 1rem;
+    }
+
+    /* =================== FOOTER =================== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-logo .u-small {
+      width: 24px; height: 24px;
+      background: var(--red);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.75rem;
+    }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--red); }
+
+    /* =================== BACK TO TOP =================== */
+    #btt {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all var(--transition);
+      z-index: 998;
+      font-size: 1.1rem;
+    }
+    #btt.visible { opacity: 1; pointer-events: all; }
+    #btt:hover { background: var(--red-dk); transform: translateY(-3px); }
+
+    /* =================== RESPONSIVE =================== */
+    @media (max-width: 1024px) {
+      .method-grid { grid-template-columns: repeat(2, 1fr); }
+      .method-card { border-bottom: 1px solid var(--border); }
+      .method-card:nth-child(2) { border-right: none; }
+      .method-card:nth-child(3) { border-right: 1px solid var(--border); }
+      .method-card:nth-child(4) { border-right: none; border-bottom: none; }
+      .method-card:nth-child(3) { border-bottom: none; }
+      .clients-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      #menu-toggle { display: flex; }
+      .about-grid,
+      .skills-layout,
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .method-grid { grid-template-columns: 1fr; }
+      .method-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .method-card:last-child { border-bottom: none; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-headline { font-size: 4.5rem; }
+      .section { padding: 5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =================== MOBILE MENU =================== -->
+<div id="mobile-menu" role="dialog" aria-label="Menú principal">
+  <button id="mobile-close" aria-label="Cerrar menú">✕</button>
+  <a href="#nosotros" onclick="closeMobile()">Nosotros</a>
+  <a href="#metodologia" onclick="closeMobile()">Metodología</a>
+  <a href="#portafolio" onclick="closeMobile()">Portafolio</a>
+  <a href="#habilidades" onclick="closeMobile()">Habilidades</a>
+  <a href="#contacto" onclick="closeMobile()">Contacto</a>
+</div>
+
+<!-- =================== NAVBAR =================== -->
+<nav id="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="u designs inicio">
+      <span class="u-circle">u</span>designs
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#metodologia">Metodología</a></li>
+      <li><a href="#portafolio">Portafolio</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">☀</button>
+      <a href="#contacto" class="btn btn-red" style="padding:0.65rem 1.2rem;font-size:0.65rem;">Trabajemos</a>
+      <button id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-gradient"></div>
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span class="tag">Lima, Perú</span>
+      <span class="tag">Agencia Creativa</span>
+    </div>
+    <h1 class="hero-headline" data-aos="fade-up" data-aos-duration="900">
+      <span class="word-outline">INSPI</span><span class="word-red">RA</span><br>
+      IMA<span class="word-red">GI</span>NA<br>
+      <span class="word-outline">IMPAC</span><span class="word-red">TA</span>
+    </h1>
+    <div class="hero-sub" data-aos="fade-up" data-aos-delay="200" data-aos-duration="900">
+      <p class="hero-description">
+        Somos <strong>diseñadores, estrategas y creativos</strong> descifrando un contexto incierto y materializando ideas. Datos, diseño, creatividad y tecnología para llegar al corazón de las personas.
+      </p>
+      <div class="hero-cta">
+        <a href="#portafolio" class="btn btn-red">
+          Ver Portafolio
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contacto" class="btn btn-outline">Contáctanos</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- =================== ABOUT =================== -->
+<section id="nosotros" class="section">
+  <div class="container">
+    <span class="tag" data-aos="fade-right">Quiénes somos</span>
+    <div class="about-grid">
+      <div data-aos="fade-right" data-aos-delay="100">
+        <h2 class="about-quote">
+          LA CREATIVIDAD<br>
+          SIEMPRE ES LA<br>
+          <span class="accent">SOLUCIÓN</span>
+        </h2>
+        <p class="about-body">
+          Diseñamos y ejecutamos contenidos creativos para todos los soportes. Nos basamos en la originalidad y en los datos para que te diferencies de la competencia, emociones a tus clientes y consigas resultados sorprendentes.
+        </p>
+        <div style="margin-top:2.5rem;">
+          <a href="#contacto" class="btn btn-red">Trabajemos juntos</a>
+        </div>
+      </div>
+      <div class="about-pillars" data-aos="fade-left" data-aos-delay="200">
+        <div class="pillar">
+          <div class="pillar-title">ADN híbrido</div>
+          <div class="pillar-text">Datos y creatividad. Diseño y tecnología. Consultora y agencia en equilibrio fluido entre lógica y "mágica".</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Cariño y emoción</div>
+          <div class="pillar-text">Buenas personas y mejores profesionales, totalmente entregados a la causa de nuestros clientes.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Impulsores del cambio</div>
+          <div class="pillar-text">Ejecutamos proyectos y transferimos capacidades digitales a nuestros clientes.</div>
+        </div>
+        <div style="margin-top:1rem;padding:2rem;background:var(--card-bg);border:1px solid var(--border);">
+          <div class="tag" style="margin-bottom:0.8rem;">UDESIGNSPERU.COM</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Experiencias, servicios, soluciones y productos digitales que conectan marcas y personas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== METODOLOGÍA =================== -->
+<section id="metodologia" class="section">
+  <div class="container">
+    <span class="tag" data-aos="fade-right">Nuestra Metodología</span>
+    <h2 class="section-title" data-aos="fade-right" data-aos-delay="100">
+      CÓMO LO<br><span class="red">HACEMOS</span>
+    </h2>
+    <div class="method-grid" data-aos="fade-up" data-aos-delay="200">
+      <div class="method-card">
+        <div class="method-num">01</div>
+        <div class="method-title">Strategy<br>& Research</div>
+        <div class="method-text">Trabajamos con la alta dirección para definir procesos de transformación y crecimiento de negocio a través de canales digitales.</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">02</div>
+        <div class="method-title">Experience<br>& Design</div>
+        <div class="method-text">Diseñamos y desarrollamos puntos de contacto a lo largo del customer journey para crear experiencias de marca memorables.</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">03</div>
+        <div class="method-title">Engagement<br>& Social</div>
+        <div class="method-text">Fortalecemos la relación con los clientes en medios sociales, mediante herramientas CRM y de marketing automation.</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">04</div>
+        <div class="method-title">Performance<br>& Media</div>
+        <div class="method-text">Definimos el stack de martech para optimizar la inversión en todos los canales. Del branding a la conversión. Del SEO al social. Del cerebro al corazón.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PORTFOLIO =================== -->
+<section id="portafolio" class="section">
+  <div class="container">
+    <span class="tag" data-aos="fade-right">Nuestro trabajo</span>
+    <h2 class="section-title" data-aos="fade-right" data-aos-delay="100">
+      PORTA<span class="red">FOLIO</span>
+    </h2>
+    <div class="filter-bar" data-aos="fade-up" data-aos-delay="180">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="branding">Branding</button>
+      <button class="filter-btn" data-filter="packaging">Packaging</button>
+      <button class="filter-btn" data-filter="digital">Digital</button>
+    </div>
+    <div class="portfolio-grid" data-aos="fade-up" data-aos-delay="250">
+
+      <!-- BRANDING -->
+      <div class="portfolio-card card-branding" data-cat="branding">
+        <div class="card-bg" style="background-image:url('images/ferreycorp.png')"></div>
+        <div class="card-num">01</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Branding</div>
+          <div class="card-name">FERREYCORP</div>
+          <div class="card-desc">Editoriales corporativas para uno de los grupos empresariales más importantes del Perú.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-branding" data-cat="branding">
+        <div class="card-bg" style="background-image:url('images/cenfotour.jpg')"></div>
+        <div class="card-num">02</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Branding</div>
+          <div class="card-name">CENFOTOUR</div>
+          <div class="card-desc">Branding integral: Brochure, Trípticos, Cuadernos, Gigantografías, Videos y Animaciones.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-branding" data-cat="branding">
+        <div class="card-bg" style="background-image:url('images/disal.jpg')"></div>
+        <div class="card-num">03</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Branding Sostenible</div>
+          <div class="card-name">DISAL</div>
+          <div class="card-desc">Branding sostenible con materiales 100% reciclados. Innovación con conciencia ambiental.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-branding" data-cat="branding">
+        <div class="card-bg" style="background-image:url('images/ripley.png')"></div>
+        <div class="card-num">04</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Branding · Editorial</div>
+          <div class="card-name">RIPLEY</div>
+          <div class="card-desc">Endomarketing, Branding, Editorial Visual. Portal Personas — comunicación interna de alto impacto.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-branding" data-cat="branding">
+        <div class="card-bg" style="background-image:url('images/promperu.png')"></div>
+        <div class="card-num">05</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Marketing de Destino</div>
+          <div class="card-name">PROMPERU</div>
+          <div class="card-desc">Perú Mark — Nuestras Rutas. "Si el corazón dice sí, ven y visita." Campaña para promover el turismo nacional.</div>
+        </div>
+      </div>
+
+      <!-- PACKAGING -->
+      <div class="portfolio-card card-packaging" data-cat="packaging">
+        <div class="card-bg" style="background-image:url('images/iberica.png')"></div>
+        <div class="card-num">06</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Packaging · Chocolates</div>
+          <div class="card-name">LA IBÉRICA</div>
+          <div class="card-desc">Línea completa de packaging: 73% Dark, 70% Dark, 57% Bitter, 44% Leche y White Chocolate.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-packaging" data-cat="packaging">
+        <div class="card-bg" style="background-image:url('images/mia01.png')"></div>
+        <div class="card-num">07</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Branding · Producto</div>
+          <div class="card-name">MIA</div>
+          <div class="card-desc">Branding y desarrollo de producto. Natural. Familia. Calidad. Nutrición. Tradición.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-packaging" data-cat="packaging">
+        <div class="card-bg" style="background-image:url('images/telefonica.jpg')"></div>
+        <div class="card-num">08</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Packaging · Identidad</div>
+          <div class="card-name">TELEFÓNICA</div>
+          <div class="card-desc">"Trabajar en Telefónica se siente bien." 2do. lugar PADIS — Mejor Imagen Institucional · Toulouse Lautrec.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-packaging" data-cat="packaging">
+        <div class="card-bg" style="background-image:url('images/alicorp.jpg')"></div>
+        <div class="card-num">09</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Packaging · FMCG</div>
+          <div class="card-name">ALICORP</div>
+          <div class="card-desc">Desarrollo de Packaging para Bolívar, Dove, Axe, Pond's, Manty y Knorr. Portafolio multimarca.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-packaging" data-cat="packaging">
+        <div class="card-bg" style="background-image:url('images/cientativa.jpg')"></div>
+        <div class="card-num">10</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Packaging Sostenible</div>
+          <div class="card-name">CIENTATIVA</div>
+          <div class="card-desc">Branding, Packaging y Fotografía. Welcome Pack con materiales sostenibles para universidades.</div>
+        </div>
+      </div>
+
+      <!-- DIGITAL -->
+      <div class="portfolio-card card-digital" data-cat="digital">
+        <div class="card-bg" style="background-image:url('images/delfin.jpg')"></div>
+        <div class="card-num">11</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Digital · Audiovisual</div>
+          <div class="card-name">DELFIN GROUP</div>
+          <div class="card-desc">Site, Extranet, Blog, Branding y Audiovisual para Delfin Logistics. Ecosistema digital completo.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-digital" data-cat="digital">
+        <div class="card-bg" style="background-image:url('images/asabercomer.jpg')"></div>
+        <div class="card-num">12</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Digital · Social Media</div>
+          <div class="card-name">A SABER COMER</div>
+          <div class="card-desc">Logo, Social Media y Blog. Construcción de comunidad y presencia digital para marca gastronómica.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-digital" data-cat="digital">
+        <div class="card-bg" style="background-image:url('images/iridium.png')"></div>
+        <div class="card-num">13</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Digital · Marketing</div>
+          <div class="card-name">IRIDIUM INGENIEROS</div>
+          <div class="card-desc">Branding, Site, Social Media y Marketing Digital para empresa de ingeniería.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-digital" data-cat="digital">
+        <div class="card-bg" style="background-image:url('images/dyc.jpg')"></div>
+        <div class="card-num">14</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Digital · Inmobiliaria</div>
+          <div class="card-name">D&C INMOBILIARIA</div>
+          <div class="card-desc">Proyectos: Mar Verde, Alegra, Bali Beach, Nuevo Valle Sol, Valle San Luis. Branding, Site, Social Media y BTL.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-digital" data-cat="digital">
+        <div class="card-bg" style="background-image:url('images/oriunda.jpg')"></div>
+        <div class="card-num">15</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">Digital · Audiovisual</div>
+          <div class="card-name">ORIUNDA</div>
+          <div class="card-desc">Branding, Site, Audiovisual y Video. Empresa distribuidora del Grupo Gloria.</div>
+        </div>
+      </div>
+
+      <div class="portfolio-card card-digital" data-cat="digital">
+        <div class="card-bg" style="background-image:url('images/bismart.jpg')"></div>
+        <div class="card-num">16</div>
+        <div class="card-color-bar"></div>
+        <div class="card-overlay">
+          <div class="card-cat">E-commerce · Digital</div>
+          <div class="card-name">BISMART</div>
+          <div class="card-desc">Branding, E-commerce, Social Media, Marketing Digital y Packaging. Tu mercado rápido y fácil.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== SKILLS / AWARDS =================== -->
+<section id="habilidades" class="section">
+  <div class="container">
+    <span class="tag" data-aos="fade-right">Capacidades &amp; Reconocimientos</span>
+    <h2 class="section-title" data-aos="fade-right" data-aos-delay="100">
+      HABILI<span class="red">DADES</span>
+    </h2>
+    <div class="skills-layout skills-layout--single">
+      <div data-aos="fade-right" data-aos-delay="150">
+        <p style="color:var(--text-muted);margin-bottom:2.5rem;font-size:0.95rem;line-height:1.75;">
+          Nuestro equipo combina expertis creativo y tecnológico para ofrecer soluciones de alto impacto en cada proyecto.
+        </p>
+        <div class="skill-item" data-skill="95">
+          <div class="skill-header">
+            <span class="skill-name">Branding &amp; Identidad Visual</span>
+            <span class="skill-pct">95%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div>
+        </div>
+        <div class="skill-item" data-skill="92">
+          <div class="skill-header">
+            <span class="skill-name">Estrategia de Marca</span>
+            <span class="skill-pct">92%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div>
+        </div>
+        <div class="skill-item" data-skill="90">
+          <div class="skill-header">
+            <span class="skill-name">Diseño de Packaging</span>
+            <span class="skill-pct">90%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-item" data-skill="88">
+          <div class="skill-header">
+            <span class="skill-name">Marketing Digital</span>
+            <span class="skill-pct">88%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-item" data-skill="85">
+          <div class="skill-header">
+            <span class="skill-name">UX/UI &amp; Experiencia Digital</span>
+            <span class="skill-pct">85%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-item" data-skill="82">
+          <div class="skill-header">
+            <span class="skill-name">Social Media &amp; Comunidades</span>
+            <span class="skill-pct">82%</span>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CLIENTES =================== -->
+<section id="clientes" class="section">
+  <div class="container">
+    <span class="tag" data-aos="fade-right">Marcas que confían en nosotros</span>
+    <h2 class="section-title" data-aos="fade-right" data-aos-delay="100">
+      NUESTROS<br><span class="red">CLIENTES</span>
+    </h2>
+    <div class="clients-grid" data-aos="fade-up" data-aos-delay="200">
+      <div class="client-cell"><img src="images/logos/oriunda.svg" alt="Oriunda" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/terranorte.svg" alt="Terranorte" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/osinergmin.svg" alt="Osinergmin" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/ripley.svg" alt="Ripley" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/promperu.svg" alt="PromPerú" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/iberica.svg" alt="La Ibérica" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/telefonica.svg" alt="Telefónica" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/ferreycorp.svg" alt="Ferreycorp" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/cenfotur.svg" alt="Cenfotur" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/ambipar.svg" alt="Ambipar" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/dyg-inmobiliaria.svg" alt="DYG Inmobiliaria" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/orvex.svg" alt="Orvex" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/mynd-plus.svg" alt="Mynd+" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/alpa.svg" alt="Alpa" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/arnisa.svg" alt="Arnisa" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/haray.svg" alt="Haray" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/dyc.svg" alt="D&amp;C" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/peru-offset.svg" alt="Perú Offset" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/diaconia.svg" alt="Diaconía" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/amora.svg" alt="Amora" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/cienciativa.svg" alt="Cienciativa" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/cica.svg" alt="CICA" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/fimar.svg" alt="Fimar" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/rlc.svg" alt="RLC" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/trajes-tipicos-del-peru.svg" alt="Trajes Típicos del Perú" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/lemavet.svg" alt="Lemavet" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/sheraton.svg" alt="Sheraton" loading="lazy"></div>
+      <div class="client-cell"><img src="images/logos/bilbopark.svg" alt="Bilbopark" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CONTACT =================== -->
+<section id="contacto" class="section">
+  <div class="container">
+    <span class="tag" data-aos="fade-right">Trabajemos juntos</span>
+    <h2 class="section-title" data-aos="fade-right" data-aos-delay="100">
+      CUÉN<span class="red">TANOS</span><br>TU PROYECTO
+    </h2>
+    <div class="contact-layout">
+      <div data-aos="fade-right" data-aos-delay="150">
+        <p class="contact-info-big">¿Tienes un proyecto en mente? <span class="red">Hablemos.</span></p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div>
+            <div class="contact-detail-label">Teléfono / WhatsApp</div>
+            <div class="contact-detail-value">998 266 052 · 994 057 344</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-value">mfarto@udesignsperu.com</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🌐</div>
+          <div>
+            <div class="contact-detail-label">Web</div>
+            <div class="contact-detail-value">udesignsperu.com</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div>
+            <div class="contact-detail-label">Ubicación</div>
+            <div class="contact-detail-value">Lima, Perú</div>
+          </div>
+        </div>
+      </div>
+
+      <div data-aos="fade-left" data-aos-delay="200">
+        <!--
+          INSTRUCCIONES FORMSPREE:
+          1. Ve a https://formspree.io y crea una cuenta gratuita.
+          2. Crea un nuevo formulario y copia tu Form ID (ej: xpwzaabc).
+          3. Reemplaza "TU_FORM_ID" en la línea de abajo con tu ID real.
+          Ejemplo: action="https://formspree.io/f/xpwzaabc"
+        -->
+        <form id="contact-form" action="https://formspree.io/f/mjgleqzo" method="POST" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nombre *</label>
+              <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="company">Empresa / Marca</label>
+            <input type="text" id="company" name="company" placeholder="Nombre de tu empresa (opcional)" />
+          </div>
+          <div class="form-group">
+            <label for="service">Servicio de interés</label>
+            <select id="service" name="service">
+              <option value="">Selecciona un servicio…</option>
+              <option value="branding">Branding &amp; Identidad Visual</option>
+              <option value="packaging">Diseño de Packaging</option>
+              <option value="digital">Marketing Digital</option>
+              <option value="ux">UX/UI &amp; Desarrollo Web</option>
+              <option value="social">Social Media</option>
+              <option value="integral">Estrategia Integral</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensaje *</label>
+            <textarea id="message" name="message" placeholder="Cuéntanos sobre tu proyecto, objetivos y plazos…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-red" style="width:100%;justify-content:center;">
+            Enviar Mensaje
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          </button>
+          <div class="form-success" id="form-success">
+            ✓ &nbsp; Mensaje enviado. ¡Te contactaremos pronto!
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <span class="u-small">u</span>designs · agencia creativa
+    </div>
+    <div class="footer-copy">
+      © 2025 u designs. Lima, Perú. Todos los derechos reservados.
+    </div>
+    <div class="footer-links">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<!-- =================== BACK TO TOP =================== -->
+<button id="btt" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+<!-- =================== AOS =================== -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  /* ======= AOS Init ======= */
+  AOS.init({
+    once: true,
+    offset: 80,
+    easing: 'ease-out-cubic',
+    duration: 800
+  });
+
+  /* ======= Navbar scroll ======= */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  /* ======= Theme toggle ======= */
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    toggle.textContent = isDark ? '☾' : '☀';
+  });
+
+  /* ======= Mobile menu ======= */
+  const menuBtn = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-close');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click', closeMobile);
+
+  /* ======= Portfolio filter ======= */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.portfolio-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.cat === filter;
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  /* ======= Skill bars animated on scroll ======= */
+  const skillBars = document.querySelectorAll('.skill-bar-fill');
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        const width = bar.dataset.width;
+        setTimeout(() => { bar.style.width = width + '%'; }, 200);
+        skillObserver.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.3 });
+  skillBars.forEach(bar => skillObserver.observe(bar));
+
+  /* ======= Back to top ======= */
+  const btt = document.getElementById('btt');
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 600);
+  });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ======= Contact form (Formspree AJAX) ======= */
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('form-success');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = form.querySelector('[type="submit"]');
+    const orig = submitBtn.innerHTML;
+    submitBtn.innerHTML = 'Enviando…';
+    submitBtn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        form.reset();
+        successMsg.style.display = 'block';
+        setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
+      } else {
+        alert('Error al enviar. Por favor intenta nuevamente.');
+      }
+    } catch {
+      alert('Error de conexión. Por favor intenta nuevamente.');
+    }
+    submitBtn.innerHTML = orig;
+    submitBtn.disabled = false;
+  });
+
+  /* ======= Active nav link on scroll ======= */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === '#' + entry.target.id
+            ? 'var(--text)' : '';
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
+</body>
+</html>
