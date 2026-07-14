@@ -168,16 +168,11 @@
       align-items: center;
       gap: 0;
     }
-    .nav-logo .u-circle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px; height: 32px;
-      background: var(--red);
-      border-radius: 50%;
-      color: #fff;
-      font-size: 1rem;
-      margin-right: 4px;
+    .nav-logo .brand-mark {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      margin-right: 6px;
     }
     .nav-links {
       display: flex;
@@ -829,15 +824,10 @@
       align-items: center;
       gap: 6px;
     }
-    .footer-logo .u-small {
-      width: 24px; height: 24px;
-      background: var(--red);
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 0.75rem;
+    .footer-logo .brand-mark {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
     }
     .footer-copy {
       font-family: 'Space Mono', monospace;
@@ -930,7 +920,7 @@
 <nav id="navbar" role="navigation" aria-label="Navegación principal">
   <div class="container nav-inner">
     <a href="#hero" class="nav-logo" aria-label="u designs inicio">
-      <span class="u-circle">u</span>designs
+      <img class="brand-mark" src="logo.png" alt="U">designs
     </a>
     <ul class="nav-links" role="list">
       <li><a href="#nosotros">Nosotros</a></li>
@@ -1441,7 +1431,7 @@
 <footer>
   <div class="container footer-inner">
     <div class="footer-logo">
-      <span class="u-small">u</span>designs · agencia creativa
+      <img class="brand-mark" src="logo.png" alt="U">designs · agencia creativa
     </div>
     <div class="footer-copy">
       © 2025 u designs. Lima, Perú. Todos los derechos reservados.
