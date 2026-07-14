@@ -204,7 +204,10 @@
       width: 36px;
       height: 36px;
       object-fit: contain;
-      margin-right: 6px;
+      margin-right: 0;
+    }
+    .nav-logo .brand-text {
+      margin-left: -2px;
     }
     .nav-links {
       display: flex;
@@ -857,13 +860,14 @@
       letter-spacing: 0.06em;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 0;
     }
     .footer-logo .brand-mark {
       width: 28px;
       height: 28px;
       object-fit: contain;
     }
+    .footer-logo .brand-text { margin-left: -2px; }
     .footer-copy {
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem;
@@ -956,7 +960,7 @@
 <nav id="navbar" role="navigation" aria-label="Navegación principal">
   <div class="container nav-inner">
     <a href="#hero" class="nav-logo" aria-label="u designs inicio">
-      <img class="brand-mark" src="logo.png" alt="Logotipo de Udesigns, estudio creativo en Lima, Perú">designs
+      <img class="brand-mark" src="logo.png" alt="Logotipo de Udesigns, estudio creativo en Lima, Perú"><span class="brand-text">designs</span>
     </a>
     <ul class="nav-links" role="list">
       <li><a href="#nosotros">Nosotros</a></li>
@@ -1154,7 +1158,7 @@
 
       <!-- PACKAGING -->
       <div class="portfolio-card card-branding" data-cat="branding">
-        <div class="card-bg" style="background-image:url('images/ferreycorp.png'),url('ferreycorp.png')"></div>
+        <div class="card-bg" style="background-image:url('ferreycorp.png')"></div>
         <div class="card-num">06</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1210,7 +1214,7 @@
 
       <!-- DIGITAL -->
       <div class="portfolio-card card-packaging" data-cat="packaging">
-        <div class="card-bg" style="background-image:url('images/mia_snack.png'),url('images/mia01.png'),url('mia01.png')"></div>
+        <div class="card-bg" style="background-image:url('mia01.png')"></div>
         <div class="card-num">11</div>
         <div class="card-color-bar"></div>
         <div class="card-overlay">
@@ -1479,7 +1483,7 @@
 <footer>
   <div class="container footer-inner">
     <div class="footer-logo">
-      <img class="brand-mark" src="logo.png" alt="" aria-hidden="true">designs · estudio creativo
+      <img class="brand-mark" src="logo.png" alt="" aria-hidden="true"><span class="brand-text">designs</span> · estudio creativo
     </div>
     <div class="footer-copy">
       © 2025 Udesigns. Lima, Perú. Todos los derechos reservados.
